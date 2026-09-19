@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Sleep Well Kit</title>
+    <!-- Import fon estetik -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F5F3E7;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><path fill="%23E0E8D9" fill-opacity="0.4" d="M146.9 85.5c-4.6 11.7-11.1 23.1-17.1 34.6-6.1 11.7-11.6 23.8-16.5 36.1l1.3 1c12-3.3 24.2-5.8 36.6-7.3 12.6-1.7 25.5-2.3 38.2-3.3l.1-1.2c-8.9-7.9-17.8-15.6-26.6-23.4-9-8.1-17.9-16.4-26.9-24.6-1-1.1-2-2.2-3.1-3.3zm-85.1 49c11.1 3.5 21.9 7.7 32.2 12.5 10.4 4.9 20.3 10.3 29.8 16.2l.8-.7c-6.9-10.4-13.1-21.2-18.8-32.1-5.8-11.1-11.1-22.6-15.8-34.3l-1.2-.3c-4.6 9.8-9.1 19.6-13.5 29.4-4.6 9.7-9.2 19.3-13.7 29zm95.8-108.1c-9.4 7.4-18.7 14.9-27.7 22.8-8.8 8-17.4 16.1-25.5 24.7l.7 1.1c11-3.9 22.3-7.2 33.7-9.8 11.5-2.7 23.2-4.7 35-6.1l.3-1.3c-6.4-10.7-13-21.2-19.6-31.7-6.7-10.7-13.5-21.2-20.4-31.7zM32.3 30.4c7.6 8.7 15.7 16.8 24.3 24.3 8.7 7.4 17.8 14.2 27.3 20.6l.5-.8c-4.3-12-8.1-24.4-11.3-37.1-3.4-12.8-6.3-25.7-8.8-38.9l-1.3 0c-2.8 10.4-5.8 20.8-8.9 31.1-3.1 10.4-6.3 20.7-9.7 31zm140.3 131.7c-9.4 7.4-18.7 14.9-27.7 22.8-8.8 8-17.4 16.1-25.5 24.7l.7 1.1c11-3.9 22.3-7.2 33.7-9.8 11.5-2.7 23.2-4.7 35-6.1l.3-1.3c-6.4-10.7-13-21.2-19.6-31.7-6.7-10.7-13.5-21.2-20.4-31.7z"/></svg>');
+            margin: 0;
+            padding: 20px;
+            color: #555;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 480px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.3rem;
+            color: #6D7973;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+            padding: 0 5px;
+        }
+        .card-section {
+            background: #FAFAF5;
+            border: 1px solid #E0E8D9;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .section-heading {
+            font-size: 1rem;
+            color: #6D7973;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        /* Borang Input */
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .form-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 4px;
+            display: block;
+        }
+        .form-control {
+            width: 100%;
+            padding: 9px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            box-sizing: border-box;
+            background: white;
+        }
+        /* Mood Tracker Pilihan */
+        .mood-options {
+            display: flex;
+            justify-content: space-around;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 5px 0;
+        }
+        .mood-options input[type="radio"] {
+            display: none;
+        }
+        .mood-label {
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+        .mood-options input[type="radio"]:checked + .mood-label {
+            transform: scale(1.3);
+            background: #e2edd8;
+            padding: 2px 8px;
+            border-radius: 50%;
+        }
+        /* Musik Kategori & Senarai */
+        .category-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #555;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            border-bottom: 1px dashed #ddd;
+            padding-bottom: 3px;
+        }
+        .playlist-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            border: 1px solid #eee;
+        }
+        .yt-btn {
+            background: #FF0000;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .yt-btn:hover { background: #CC0000; }
+        
+        /* Butang Spray */
+        .btn-spray {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .btn-1 { background-color: #4CAF50; }
+        .btn-2 { background-color: #2196F3; }
+        .btn-3 { background-color: #FF9800; }
+        .btn-spray:active { transform: scale(0.98); }
+        #spray-status { font-size: 0.8rem; color: #2E7D32; text-align: center; margin-top: 5px; }
+
+        .submit-btn {
+            background: #6D7973;
+            color: white;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+        .submit-btn:hover { background: #5a645f; }
+        .footer {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-top: 15px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 1. Kata-kata Aluan -->
+        <h1 class="title">Smart Sleep Well Kit</h1>
+        <p class="subtitle">
+            Selamat datang ke laman web Smart Sleep Well Kit. Terima kasih kerana sudi memilih produk kami dan kami harap anda dapat menikmati tidur yang lena serta tenang sepanjang penginapan anda. Nikmati malam yang tenang dengan Smart Sleep Well Kit anda.
+        </p>
+
+        <!-- Borang Gabungan (Maklumat Tetamu, Mood, Muzik Pilihan & Maklum Balas) -->
+        <form onsubmit="submitAllData(event)">
+            
+            <!-- Maklumat Peribadi Tetamu -->
+            <div class="card-section">
+                <div class="section-heading">📝 Maklumat Tetamu</div>
+                <div class="form-group">
+                    <label class="form-label">Nama Anda:</label>
+                    <input type="text" class="form-control" id="guestName" placeholder="Cth: Ahmad bin Ali" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nombor Bilik:</label>
+                    <input type="text" class="form-control" id="roomNumber" placeholder="Cth: Bilik 204" required>
+                </div>
+            </div>
+
+            <!-- Palang Penilaian Mood -->
+            <div class="card-section">
+                <div class="section-heading">Bagaimana mood anda hari ini?</div>
+                <div class="mood-options">
+                    <div>
+                        <input type="radio" id="mood1" name="mood" value="Stres 😫" required>
+                        <label for="mood1" class="mood-label">😫</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="mood2" name="mood" value="Letih 🥱">
+                        <label for="mood2" class="mood-label">🥱</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="mood3" name="mood" value="Biasa 😌">
+                        <label for="mood3" class="mood-label">😌</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="mood4" name="mood" value="Tenang ✨">
+                        <label for="mood4" class="mood-label">✨</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Senarai Pilihan Muzik -->
+            <div class="card-section">
+                <div class="section-heading">🎵 Playlist Bantuan Tidur (YouTube)</div>
+                <p style="font-size: 0.75rem; color: #666; text-align: center; margin-bottom: 10px;">Klik 'Dengar' untuk buka pilihan muzik anda:</p>
+                
+                <!-- Kategori 1 -->
+                <div class="category-title">🌿 1. Alam Sekitar</div>
+                <div class="playlist-item"><span>Bunyi Hujan Lebat & Petir</span><a href="https://youtu.be/q76bMs-NwRk?si=z1npRcIiQr09J4Na" target="_blank" class="yt-btn">Dengar</a></div>
+                <div class="playlist-item"><span>Deruan Ombak Pantai</span><a href="https://youtu.be/bn9F19Hi1Lk?si=D8aExAQc06ymj3HA" target="_blank" class="yt-btn">Dengar</a></div>
+                <div class="playlist-item"><span>Tiupan Angin Hutan</span><a href="https://youtu.be/7GoXVDH656g?si=vavqca8CVPlv01-t" target="_blank" class="yt-btn">Dengar</a></div>
+                <div class="playlist-item"><span>Aliran Sungai Tenang</span><a href="https://youtu.be/nE_XAauwu1I?si=hZ3ZVfew0IsLzeh3" target="_blank" class="yt-btn">Dengar</a></div>
+
+                <!-- Kategori 2 -->
+                <div class="category-title">🎸 2. Akustik</div>
+                <div class="playlist-item"><span>Gitar Akustik Lembut</span><a href="https://youtu.be/aEvUSzP7Gso?si=4yn5XXBMKN5BkMSm" target="_blank" class="yt-btn">Dengar</a></div>
+                <div class="playlist-item"><span>Piano</span><a href="https://youtu.be/2x2CDVKD9RA?si=8rBjp6KVFzB1i6-Q" target="_blank" class="yt-btn">Dengar</a></div>
+                <div class="playlist-item"><span>Singing Bowl</span><a href="https://youtu.be/BbaInf0fByU?si=M-Nj3XKTTg7Pa3C0" target="_blank" class="yt-btn">Dengar</a></div>
+                <div class="playlist-item"><span>Seruling</span><a href="https://youtu.be/0ebsbln62ZU?si=qXf-HnkP6WRYBTmz" target="_blank" class="yt-btn">Dengar</a></div>
+
+                <!-- Kategori 3 -->
+                <div class="category-title">🧸 3. Lullaby</div>
+                <div class="playlist-item"><span>Music Box Klasik</span><a href="https://youtu.be/W-vBu2rf8TI?si=6-1eot8qt_nP85sK" target="_blank" class="yt-btn">Dengar</a></div>
+                <div class="playlist-item"><span>Dodoian Bayi Tenang</span><a href="https://youtu.be/vcwpF-fDWpo?si=3geTVtiL43mgfPcB" target="_blank" class="yt-btn">Dengar</a></div>
+                <div class="playlist-item"><span>Lullaby Tidur Nyenyak</span><a href="https://youtu.be/2W9Y6KcJK1E?si=enQYHhKmW1uaD0lh" target="_blank" class="yt-btn">Dengar</a></div>
+                 
+                <!-- Kategori 4 -->
+                <div class="category-title">✨ 4. Spiritual & Meditasi</div>
+                <div class="playlist-item"><span>Frekuensi 432Hz</span><a href="https://www.youtube.com/live/u3papaX85MA?si=35v4BCIU7a_0rDlr" target="_blank" class="yt-btn">Dengar</a></div>
+                <div class="playlist-item"><span>Zikir Penenang Hati</span><a href="https://youtu.be/Hy7Sk2k8zy8?si=TYZNX9qkTB1Ov7BN" target="_blank" class="yt-btn">Dengar</a></div>
+                <div class="playlist-item"><span>Quran Reading + Rain</span><a href="https://youtu.be/bVpAMcLQg48?si=ZvhyPx0pn0CvU6Gj" target="_blank" class="yt-btn">Dengar</a></div>
+            </div>
+
+            <!-- Maklum Balas Pelanggan -->
+            <div class="card-section">
+                <div class="section-heading">💬 Maklum Balas / Cadangan</div>
+                <div class="form-group">
+                    <textarea class="form-control" id="feedbackMessage" rows="3" placeholder="Sila berikan ulasan anda tentang kit atau perkhidmatan kami..."></textarea>
+                </div>
+            </div>
+
+            <!-- Butang Hantar Semua -->
+            <button type="submit" class="submit-btn">Hantar Maklumat & Maklum Balas</button>
+            <div id="submit-status" style="font-size: 0.8rem; color: #2E7D32; text-align: center; margin-top: 8px;"></div>
+        </form>
+
+        <!-- Kawalan Semburan Pintar (Blynk Terus) -->
+        <div class="card-section" style="margin-top: 15px;">
+            <div class="section-heading">🌿 Kawalan Semburan Bilik</div>
+            <button class="btn-spray btn-1" onclick="sendSpray(1)">1 Kali Semburan</button>
+            <button class="btn-spray btn-2" onclick="sendSpray(2)">2 Kali Semburan</button>
+            <button class="btn-spray btn-3" onclick="sendSpray(3)">3 Kali Semburan</button>
+            <div id="spray-status"></div>
+        </div>
+
+        <div class="footer">
+            *You can activate your room spray without even connect to the hotel wifi.
+        </div>
+    </div>
+
+    <script>
+        const BLYNK_AUTH = 'MMvmYyeidQMm0zShvwSRujg-CVuW66Sd';
+
+        // Fungsi Kawalan Semburan Blynk
+        function sendSpray(count) {
+            const statusEl = document.getElementById('spray-status');
+            statusEl.innerHTML = "Menghantar arahan " + count + " semburan...";
+
+            fetch(`https://sgp1.blynk.cloud/external/api/update?token=${BLYNK_AUTH}&v0=${count}`)
+                .then(response => {
+                    if (response.ok) {
+                        statusEl.innerHTML = "Berjaya! Mesin sedang menyembur " + count + " kali.";
+                        setTimeout(() => { statusEl.innerHTML = ""; }, 4000);
+                    } else {
+                        statusEl.innerHTML = "Gagal menghantar arahan.";
+                    }
+                })
+                .catch(error => {
+                    statusEl.innerHTML = "Ralat rangkaian.";
+                });
+        }
+
+        // Fungsi Menghantar Semua Data ke Google Sheets
+        function submitAllData(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('guestName').value;
+            const room = document.getElementById('roomNumber').value;
+            const selectedMood = document.querySelector('input[name="mood"]:checked').value;
+            const feedback = document.getElementById('feedbackMessage').value || "Tiada maklum balas bertulis";
+            const statusEl = document.getElementById('submit-status');
+            
+            statusEl.innerHTML = "Sedang menghantar maklumat...";
+
+            // URL Google Apps Script Tetap Anda
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzdtjb6QkJf4iw2zq_M19xPw9kk-Zm7gFXRYMvuEKkLZwnQsuH3VYRTqmBewmPsm0Wv5Q/exec';
+
+            const data = {
+                name: name,
+                room: room,
+                mood: selectedMood,
+                message: feedback
+            };
+
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                statusEl.innerHTML = "Terima kasih, " + name + "! Maklumat anda telah berjaya disimpan.";
+                // Reset borang
+                document.getElementById('guestName').value = '';
+                document.getElementById('roomNumber').value = '';
+                document.getElementById('feedbackMessage').value = '';
+                document.querySelectorAll('input[name="mood"]').forEach(el => el.checked = false);
+                
+                setTimeout(() => { statusEl.innerHTML = ""; }, 6000);
+            })
+            .catch(error => {
+                statusEl.innerHTML = "Maaf, ralat berlaku semasa menghantar.";
+            });
+        }
+    </script>
+</body>
+</html>
